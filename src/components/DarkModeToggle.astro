@@ -1,0 +1,32 @@
+---
+---
+<button id="darkModeToggle" class="fixed top-5 right-5 bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-white p-2 rounded-full shadow-md transition-colors duration-300">
+  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+  </svg>
+</button>
+
+<script>
+  const darkModeToggle = document.getElementById('darkModeToggle');
+  const htmlElement = document.documentElement;
+
+  function setDarkMode(isDark) {
+    if (isDark) {
+      htmlElement.classList.add('dark');
+      localStorage.setItem('darkMode', 'true');
+    } else {
+      htmlElement.classList.remove('dark');
+      localStorage.setItem('darkMode', 'false');
+    }
+  }
+
+  // Check user's preference from localStorage or system preference
+  if (localStorage.getItem('darkMode') === 'true' || (!('darkMode' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+    setDarkMode(true);
+  }
+
+  darkModeToggle.addEventListener('click', () => {
+    const isDark = htmlElement.classList.toggle('dark');
+    setDarkMode(isDark);
+  });
+</script>
